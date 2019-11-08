@@ -3,6 +3,7 @@
 import {app, BrowserWindow, Menu} from 'electron'
 import openAboutWindow from 'about-window'
 import registerIPC from './ipc'
+import registerMenu from './menu'
 
 const path = require('path')
 
@@ -35,40 +36,7 @@ function createWindow () {
     // titleBarStyle: 'default'
   })
 
-  if (process.env.NODE_ENV === 'development') {
-    const menu = Menu.buildFromTemplate([{
-      submenu: [
-        {
-          label: '关于',
-          click: function () {
-            openAboutWindow({
-              open_devtools: false,
-              icon_path: path.resolve('build/icons/256x256.png'),
-              homepage: 'http://magnetw.github.io',
-              css_path: path.resolve(__dirname, 'about.css'),
-              package_json_dir: path.resolve(),
-              titleBarStyle: 'hidden',
-              win_options: {
-                resizable: false,
-                minimizable: false,
-                maximizable: false,
-                movable: false,
-                titleBarStyle: 'hidden',
-                modal: true
-              }
-            })
-          }
-        },
-        {
-          label: '开发人员工具',
-          click: function () {
-            mainWindow.webContents.openDevTools()
-          }
-        }]
-    }])
-    Menu.setApplicationMenu(menu)
-  }
-
+  registerMenu(mainWindow)
   mainWindow.loadURL(winURL)
 
   mainWindow.on('closed', () => {

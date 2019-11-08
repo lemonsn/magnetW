@@ -76,6 +76,7 @@
     "xpath": "0.0.27"
   },
   "devDependencies": {
+    "@vuepress/plugin-google-analytics": "^1.2.0",
     "ajv": "^6.5.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
