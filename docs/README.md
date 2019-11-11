@@ -1,19 +1,33 @@
 ---
 home: true
-heroImage: /logo.png
+screenshot: /app.gif
 heroText: Hero 标题
 tagline: Hero 副标题
-actionText: 快速上手 →
-actionLink: /guide/
+actions:
+- text: 快速上手
+  link: /guide/
+- text: Github
+  link: https://cn.vuejs.org/
+  icon: github
+platforms:
+- text: Windows
+  link: https://cn.vuejs.org/
+  icon: windows
+- text: macOS
+  link: https://cn.vuejs.org/
+  icon: mac
+- text: Linux
+  link: https://cn.vuejs.org/
+  icon: linux
 features:
-- title: 简洁至上
-  details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
-- title: Vue驱动
-  details: 享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。
-- title: 高性能
-  details: VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。
-footer: MIT Licensed | Copyright © 2018-present Evan You
+- title: 跨平台
+  details: 脱离环境限制，支持Windows、Mac、Linux，开箱即用。
+- title: 脱离服务器
+  details: 不再需要服务器，直接从本地请求，更稳定高效。
+- title: 预加载
+  details: 异步缓存源站请求，后续操作秒加载。
+footer: GPLv3 Licensed | Copyright © {year} {author}
 ---
 
-# Hello VuePress
+<font color=#7f8c8d>*本文档搭载服务器由[搬瓦工中文网](http://bwgcn.io/?from=magnetw-docs)提供</font>
 
