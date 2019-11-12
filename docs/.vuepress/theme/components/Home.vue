@@ -7,7 +7,8 @@
                          :alt="data.heroAlt || 'hero'">
                 </div>
                 <div class="right">
-                    <h1 v-if="data.heroText !== null" id="main-title">{{ data.heroText || $title || 'Hello' }}</h1>
+                    <h1 v-if="data.heroText !== null" id="main-title">{{ data.heroText || $title || 'Hello'}}<span
+                            class="latest">{{data.latest}}</span></h1>
                     <div class="description">
                         {{ data.tagline || $description || 'Welcome to your VuePress site' }}
                     </div>
@@ -105,6 +106,11 @@
 
             #main-title
                 margin-top 0
+
+            #main-title .latest
+                margin-left 1rem
+                font-size 80%
+                vertical-align bottom
 
             .action-button
                 margin 0 0.5em

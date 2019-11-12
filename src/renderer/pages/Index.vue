@@ -10,6 +10,12 @@
         <el-main class="index-main scroll-container">
             <el-scrollbar class="index-main-scrollbar">
                 <div class="index-main-content">
+                    <div class="active-rule-link">
+                        <span class="active-rule-name">{{activeRule.name}}</span>
+                        <browser-link :href="page.current.url||activeRule.url" :underline="false">
+                            {{page.current.url||activeRule.url}}
+                        </browser-link>
+                    </div>
                     <el-input :placeholder="placeholder" v-model="page.current.keyword"
                               @keyup.enter.native="handleSearch"
                               size="medium">
@@ -23,6 +29,7 @@
                                     :value="key">
                             </el-option>
                         </el-select>
+                        <i slot="suffix" class="el-input__icon el-icon-link"></i>
                         <el-button slot="append" icon="el-icon-search" @click="handleSearch">搜索</el-button>
                     </el-input>
                     <!--<browser-link class="page-header-url" :href="page.current.url">{{page.current.url}}</browser-link>-->
@@ -107,7 +114,7 @@
   import BrowserLink from '../components/BrowserLink'
   import HighlightName from '../components/HighlightName'
   import ItemButtonGroup from '../components/ItemButtonGroup'
-  import {ipcRenderer, clipboard, shell} from 'electron'
+  import {ipcRenderer, remote, shell} from 'electron'
 
   export default {
     components: {
@@ -256,6 +263,25 @@
     .page-header-url {
         color: $color-text-gray !important;
         margin-top: 10px;
+    }
+
+    .active-rule-link {
+        margin-bottom: 10px;
+        color: $--color-info;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        background-color: cadetblue;
+
+        .el-link {
+            background-color: chocolate;
+            color: $--color-info;
+        }
+    }
+
+    .active-rule-name {
+        background-color: #3F8BFA;
+        margin-right: 5px;
     }
 
     .page-res-message {

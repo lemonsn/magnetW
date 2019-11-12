@@ -1,6 +1,7 @@
 ---
 home: true
 screenshot: /app.gif
+latest: v3.0.0
 heroText: Hero 标题
 tagline: Hero 副标题
 actions:

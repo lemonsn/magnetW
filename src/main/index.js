@@ -1,9 +1,10 @@
 'use strict'
 
 import {app, BrowserWindow, Menu} from 'electron'
-import openAboutWindow from 'about-window'
 import registerIPC from './ipc'
 import registerMenu from './menu'
+
+import {autoUpdater} from 'electron-updater'
 
 const path = require('path')
 
@@ -67,15 +68,36 @@ app.on('activate', () => {
  * support auto updating. Code Signing with a valid certificate is required.
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
  */
+function sendStatusToWindow (text) {
+  console.info(text)
+  mainWindow.webContents.send('message', text)
+}
 
-/*
-import { autoUpdater } from 'electron-updater'
-
-autoUpdater.on('update-downloaded', () => {
-  autoUpdater.quitAndInstall()
+autoUpdater.on('checking-for-update', () => {
+  sendStatusToWindow('Checking for update...')
+})
+autoUpdater.on('update-available', (info) => {
+  sendStatusToWindow('Update available.')
+})
+autoUpdater.on('update-not-available', (info) => {
+  sendStatusToWindow('Update not available.')
+})
+autoUpdater.on('error', (err) => {
+  sendStatusToWindow('Error in auto-updater. ' + err)
+})
+autoUpdater.on('download-progress', (progressObj) => {
+  let message = 'Download speed: ' + progressObj.bytesPerSecond
+  message = message + ' - Downloaded ' + progressObj.percent + '%'
+  message = message + ' (' + progressObj.transferred + '/' + progressObj.total + ')'
+  sendStatusToWindow(message)
+})
+autoUpdater.on('update-downloaded', (info) => {
+  sendStatusToWindow('Update downloaded')
 })
 
 app.on('ready', () => {
-  if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
+  if (process.env.NODE_ENV === 'production') {
+    autoUpdater.logger = console
+    autoUpdater.checkForUpdates()
+  }
 })
- */
